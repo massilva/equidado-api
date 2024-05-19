@@ -15,7 +15,7 @@ from pathlib import Path
 import django_heroku, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = 'django-insecure-n8^x*sth)yq26ow&3%=n0qrpwa%ns^b&iv$#-jkh+txvsmy9j^'
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'company',
+    'analytics',
 ]
 
 MIDDLEWARE = [

@@ -32,3 +32,13 @@ class UserModel(AbstractUser):
 
     def __str__(self):
         return f'{self.email}'
+
+
+class UserCharacteristics(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+UserModel.add_to_class('characteristics', models.ManyToManyField(UserCharacteristics, related_name='users'))
