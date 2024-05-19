@@ -103,7 +103,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 heroku_config = locals()
-del heroku_config['STATICFILES_STORAGE']
 
 STORAGES = {
     'default': {
@@ -113,7 +112,6 @@ STORAGES = {
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
     },
 }
-heroku_config['STORAGES']['staticfiles'] = STORAGES['staticfiles']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
