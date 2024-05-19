@@ -1,10 +1,12 @@
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework import status
-from django.utils.translation import gettext_lazy
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 
-from analytics.serializers import AuthTokenSerializer
+from analytics.integration.openai import OpenaiAPI
+from .models import Feedback
+from .serializers import FeedbackSerializer, AuthTokenSerializer
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -24,3 +26,21 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
             'email': user.email
         })
+
+
+class FeedbackCreateView(generics.CreateAPIView):
+    serializer_class = FeedbackSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Feedback.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        feedback = serializer.save(user=self.request.user)
+        openai_api = OpenaiAPI()
+        insights = openai_api.get_insights(self.request.user, feedback)
+
+        if insights:
+            feedback.insights = insights
+            feedback.save()
+

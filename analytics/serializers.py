@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
+from .models import Feedback
 
 
 class AuthTokenSerializer(serializers.Serializer):
@@ -35,3 +36,10 @@ class AuthTokenSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Feedback
+        fields = ['id', 'user', 'content', 'created_at', 'insights']
+        read_only_fields = ['user', 'created_at', 'insights']
