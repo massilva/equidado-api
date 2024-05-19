@@ -3,8 +3,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
-from analytics.integration.openai import OpenaiAPI
+from .integration.openai import OpenaiAPI
 from .models import Feedback
 from .serializers import FeedbackSerializer, AuthTokenSerializer
 
@@ -28,8 +29,9 @@ class CustomAuthToken(ObtainAuthToken):
         })
 
 
-class FeedbackCreateView(generics.CreateAPIView):
+class FeedbackCreateView(generics.ListCreateAPIView):
     serializer_class = FeedbackSerializer
+    authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):

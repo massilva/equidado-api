@@ -41,5 +41,5 @@ class AuthTokenSerializer(serializers.Serializer):
 class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
-        fields = ['id', 'user', 'content', 'created_at', 'insights']
+        fields = ['id', 'content', 'created_at']
         read_only_fields = ['user', 'created_at', 'insights']

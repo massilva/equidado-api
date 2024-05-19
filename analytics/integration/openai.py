@@ -34,4 +34,4 @@ class OpenaiAPI():
             ]
         )
 
-        return '\n'.join(response.choices)
+        return '\n'.join([choice.message.content for choice in response.choices])
