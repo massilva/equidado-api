@@ -136,6 +136,4 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(' ') or ALLOWED_HOSTS
-
 django_heroku.settings(heroku_config)

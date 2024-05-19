@@ -22,3 +22,5 @@ DATABASES = {
         "PORT": os.environ.get('DATABASE_PORT', '5432'),
     }
 }
+
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(' ') or ALLOWED_HOSTS

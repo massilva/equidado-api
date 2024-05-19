@@ -1,3 +1,10 @@
 OPENAI_API_KEY=
 SECRET_KEY=django-insecure-n8^x*sth)yq26ow&3%=n0qrpwa%ns^b&iv$#-jkh+txvsmy9j^
-DJANGO_SETTINGS_MODULE=integra.settings.production
+DJANGO_SETTINGS_MODULE=integra.settings.development
+
+#DATABASE_ENGINE=django.db.backends.postgresql
+#DATABASE_NAME={database utilizado}
+#DATABASE_USER={usuário do banco de dados}
+#DATABASE_PASSWORD={senha do banco de dados}
+#DATABASE_HOST={caminho IP ou domínio de acesso ao banco de dados}
+#DATABASE_PORT={porta do banco de dados, padrão 5432}
