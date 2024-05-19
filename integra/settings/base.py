@@ -101,6 +101,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+heroku_config = locals()
+del heroku_config['STATICFILES_STORAGE']
+
 STORAGES = {
     'default': {
         'BACKEND': 'django.core.files.storage.FileSystemStorage',
@@ -109,6 +113,7 @@ STORAGES = {
         'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
     },
 }
+heroku_config['STORAGES']['staticfiles'] = STORAGES['staticfiles']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -134,4 +139,4 @@ REST_FRAMEWORK = {
     ]
 }
 
-django_heroku.settings(locals())
+django_heroku.settings(heroku_config)
